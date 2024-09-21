@@ -18,11 +18,15 @@ taro 4 + taro-ui 3实现的React小程序开发脚手架
 ## 编译运行
 
 ```bash
-$ npm install
+$ yarn upgrade --save
+$ yarn upgrade-interactive --latest
+$ yarn install
 
-$ npm start
+$ yarn dev:weapp
+$ taro build --type weapp --watch
 
-$ npm run build
+$ yarn build:weapp
+$ taro build --type weapp
 ```
 
 ## 目录结构
