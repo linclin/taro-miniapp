@@ -37,6 +37,8 @@
   ],
   "author": "",
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-react": "^7.24.7",
     "@babel/runtime": "^7.25.6",
     "@tarojs/components": "4.0.5",
     "@tarojs/helper": "4.0.5",

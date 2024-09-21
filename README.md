@@ -18,6 +18,7 @@ taro 4 + taro-ui 3实现的React小程序开发脚手架
 ## 编译运行
 
 ```bash
+$ yarn config set registry https://registry.npmmirror.com/
 $ yarn upgrade --save
 $ yarn upgrade-interactive --latest
 $ yarn install
