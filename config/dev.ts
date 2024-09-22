@@ -5,6 +5,9 @@ export default {
     stats: true
   },
   // plugins: ['@tarojs/plugin-react-devtools'],
+  cache: {
+    enable: false
+  },
   mini: {},
   h5: {}
 } satisfies UserConfigExport<'webpack5'>

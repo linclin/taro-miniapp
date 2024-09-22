@@ -1,7 +1,7 @@
 import { Component, PropsWithChildren } from 'react'
 import Taro from '@tarojs/taro';
 import { View, Canvas } from '@tarojs/components'
-import { AtTabBar, AtCard, AtIcon  } from 'taro-ui'
+import { AtTabBar, AtCard, AtIcon, AtDivider} from 'taro-ui'
 import uCharts from '../../js_sdk/u-charts.min.js';
 import './index.scss'
 var uChartsLineInstance = {};
@@ -39,15 +39,7 @@ export default class Index extends Component<PropsWithChildren> {
             categories: ["2018","2019","2020","2021","2022","2023"],
             series: [
               {
-                name: "成交量A",
-                data: [35,8,25,37,4,20]
-              },
-              {
-                name: "成交量B",
-                data: [70,40,65,100,44,68]
-              },
-              {
-                name: "成交量C",
+                name: "访问量",
                 data: [100,80,95,150,112,132]
               }
             ]
@@ -59,7 +51,7 @@ export default class Index extends Component<PropsWithChildren> {
       let res = {
             series: [
               {
-                data: [{"name":"一班","value":50},{"name":"二班","value":30},{"name":"三班","value":20},{"name":"四班","value":18},{"name":"五班","value":8}]
+                data: [{"name":"127.0.0.1","value":50},{"name":"localhost","value":30},{"name":"42.86.1.9","value":20}]
               }
             ]
           };
@@ -139,6 +131,21 @@ export default class Index extends Component<PropsWithChildren> {
     this.setState({
       current: value
     })
+    if (value === 0) {
+      Taro.switchTab({
+        url: '/index'
+      })
+    }
+    if (value === 1) {
+      Taro.switchTab({
+        url: '/pages/system/index'
+      })
+    }
+    if (value === 2) {
+      Taro.switchTab({
+        url: '/pages/user/index'
+      })
+    }
   }
   render () {
     return (
@@ -146,22 +153,22 @@ export default class Index extends Component<PropsWithChildren> {
         <View className='at-row at-row__justify--between'>
           <View className='at-col  at-col-6'> 
             <AtCard
-              note='累计访问1111222'
+              note='累计访问827'
               extra='今日'
-              title='接口访问量'
-              renderIcon={<AtIcon value='download-cloud' size='30' color='#F00'></AtIcon>}
+              title='接口访问'
+              renderIcon={<AtIcon value='download-cloud'></AtIcon>}
             >
-              111
+              311
             </AtCard>
           </View>
           <View className='at-col  at-col-6'>
             <AtCard
-              note='外部接口总访问量222'
+              note='外部接口总访问量139'
               extra='今日'
-              title='外部接口访问量'
-              renderIcon={<AtIcon value='external-link' size='30' color='#F00'></AtIcon>}
+              title='外部访问'
+              renderIcon={<AtIcon value='external-link'></AtIcon>}
              >
-              12
+              74
             </AtCard>
           </View>
         </View>
@@ -171,9 +178,9 @@ export default class Index extends Component<PropsWithChildren> {
               note=''
               extra=''
               title='接入系统'
-              renderIcon={<AtIcon value='download' size='30' color='#F00'></AtIcon>}
+              renderIcon={<AtIcon value='download'></AtIcon>}
             >
-              222个
+              3个
              </AtCard>
           </View>
           <View className='at-col  at-col-6'>
@@ -181,27 +188,29 @@ export default class Index extends Component<PropsWithChildren> {
               note=''
               extra=''
               title='API接口'
-              renderIcon={<AtIcon value='playlist' size='30' color='#F00'></AtIcon>}
+              renderIcon={<AtIcon value='playlist'></AtIcon>}
             >
-              223个
+              55个
             </AtCard>
           </View>
         </View>
-         <Canvas
+        <AtDivider content='系统接口请求趋势(最近7天)' />
+        <Canvas
             // {...canvasProps}
             canvas-id="gQrtPvDGEDMBSApittksuaXmQoQmrHtH"
             id="gQrtPvDGEDMBSApittksuaXmQoQmrHtH"
             class="charts"
             onTouchEnd={this.lineTap}
-          />
-          <Canvas
+        />
+        <AtDivider content='客户端访问接口情况(最近7天)' />
+        <Canvas
             // {...canvasProps}
             canvas-id="MAHniJWxZMfofHOaomPVsPLZSUnTacMh"
             id="MAHniJWxZMfofHOaomPVsPLZSUnTacMh"
             class="charts"
             onTouchEnd={this.pieTap}
-          />
-          <AtTabBar
+        />
+        <AtTabBar
             fixed
             tabList={[
               { title: '工作台', iconType: 'analytics', text: 'new' },
@@ -210,7 +219,7 @@ export default class Index extends Component<PropsWithChildren> {
             ]}
             onClick={this.handleClick.bind(this)}
             current={this.state.current}
-          />
+        />
        </View>
     )
   }

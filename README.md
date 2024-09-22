@@ -16,6 +16,8 @@ Taro 4 + Taro UI 3实现的React小程序开发脚手架
 ## 编译运行
 
 ```bash
+$ taro create system --dir system
+
 $ yarn config set registry https://registry.npmmirror.com/
 $ yarn install
 $ yarn add --dev @tarojs/plugin-react-devtools
