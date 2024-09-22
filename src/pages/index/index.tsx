@@ -131,18 +131,13 @@ export default class Index extends Component<PropsWithChildren> {
     this.setState({
       current: value
     })
-    if (value === 0) {
-      Taro.switchTab({
-        url: '/index'
-      })
-    }
     if (value === 1) {
-      Taro.switchTab({
+      Taro.reLaunch({
         url: '/pages/system/index'
       })
     }
     if (value === 2) {
-      Taro.switchTab({
+      Taro.reLaunch({
         url: '/pages/user/index'
       })
     }
