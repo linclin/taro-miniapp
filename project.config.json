@@ -4,7 +4,7 @@
 	"description": "Taro小程序开发脚手架",
 	"appid": "wxcced476fcab1b3a6",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
     "enhance": false,
     "compileHotReLoad": false,

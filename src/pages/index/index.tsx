@@ -2,18 +2,24 @@ import { Component, PropsWithChildren } from 'react'
 import Taro from '@tarojs/taro';
 import { View, Canvas } from '@tarojs/components'
 import { AtTabBar, AtCard, AtIcon, AtDivider} from 'taro-ui'
-import uCharts from '../../js_sdk/u-charts.min.js';
+import uCharts from '../../sdk/u-charts.min.js';
+import dayjs from 'dayjs';
+import httpRequest from '../../utils/http-request'
 import './index.scss'
 var uChartsLineInstance = {};
 var uChartsPieInstance = {};
 export default class Index extends Component<PropsWithChildren> {
   state = {
+    today:"",
     current: 0,
     cWidth: 750,
     cHeight: 500,
     pixelRatio: 1,
+    sysdata:{},
   }
   componentDidMount () {
+    const today = dayjs().format('MM-DD');
+    this.setState({today:today})
     const sysInfo = Taro.getSystemInfoSync();
     let pixelRatio = 1;
     //这里的第一个 750 对应 css .charts 的 width
@@ -32,31 +38,37 @@ export default class Index extends Component<PropsWithChildren> {
   componentDidShow () { }
   componentDidHide () { }
   getServerData = ()=>{
-    //模拟从服务器获取数据时的延时
-    setTimeout(() => {
-      //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-      let res = {
-            categories: ["2018","2019","2020","2021","2022","2023"],
-            series: [
-              {
-                name: "访问量",
-                data: [100,80,95,150,112,132]
-              }
-            ]
-          };
-      this.drawLineCharts('gQrtPvDGEDMBSApittksuaXmQoQmrHtH', res);
-    }, 500);
-    setTimeout(() => {
-      //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-      let res = {
-            series: [
-              {
-                data: [{"name":"127.0.0.1","value":50},{"name":"localhost","value":30},{"name":"42.86.1.9","value":20}]
-              }
-            ]
-          };
-      this.drawPieCharts('MAHniJWxZMfofHOaomPVsPLZSUnTacMh', res);
-    }, 500);
+    let lineCategories=[];
+    let lineSeriesData=[];
+    let pieSeriesData=[];
+    httpRequest.get('/api/v1/data/list') .then(({ data }) => {
+      if (data) {
+        this.setState({sysdata: data });
+        data.WeekApiCount.forEach(item => {
+          lineCategories.push(item.Date);
+          lineSeriesData.push(item.Count);
+          pieSeriesData.push({"name":item.ClientIP,"value":item.Count});
+        })
+      }
+    });
+    let lineRes = {
+      categories: lineCategories,
+      series: [
+        {
+          name: "访问量",
+          data: lineSeriesData
+        }
+      ]
+    };
+    this.drawLineCharts('gQrtPvDGEDMBSApittksuaXmQoQmrHtH', lineRes);
+    let pieRes = {
+      series: [
+        {
+          data: pieSeriesData
+        }
+      ]
+    };
+    this.drawPieCharts('MAHniJWxZMfofHOaomPVsPLZSUnTacMh', pieRes);
   }
   drawLineCharts = (id, data)=>{
     const { cWidth, cHeight, pixelRatio } = this.state;
@@ -148,22 +160,22 @@ export default class Index extends Component<PropsWithChildren> {
         <View className='at-row at-row__justify--between'>
           <View className='at-col  at-col-6'> 
             <AtCard
-              note='累计访问827'
-              extra='今日'
+              note={this.state.sysdata.AllApiCount}
+              extra={this.state.today}
               title='接口访问'
               renderIcon={<AtIcon value='download-cloud'></AtIcon>}
             >
-              311
+              {this.state.sysdata.ApiCount}
             </AtCard>
           </View>
           <View className='at-col  at-col-6'>
             <AtCard
-              note='外部接口总访问量139'
-              extra='今日'
+              note={this.state.sysdata.AllReqApiCount}
+              extra={this.state.today}
               title='外部访问'
               renderIcon={<AtIcon value='external-link'></AtIcon>}
              >
-              74
+              {this.state.sysdata.ReqApiCount}
             </AtCard>
           </View>
         </View>
@@ -175,7 +187,7 @@ export default class Index extends Component<PropsWithChildren> {
               title='接入系统'
               renderIcon={<AtIcon value='download'></AtIcon>}
             >
-              3个
+              {this.state.sysdata.SystemCount}个
              </AtCard>
           </View>
           <View className='at-col  at-col-6'>
@@ -185,7 +197,7 @@ export default class Index extends Component<PropsWithChildren> {
               title='API接口'
               renderIcon={<AtIcon value='playlist'></AtIcon>}
             >
-              55个
+              {this.state.sysdata.RouterCount}个
             </AtCard>
           </View>
         </View>
@@ -209,8 +221,8 @@ export default class Index extends Component<PropsWithChildren> {
             fixed
             tabList={[
               { title: '工作台', iconType: 'analytics', text: 'new' },
-              { title: '系统管理', iconType: 'settings' },
-              { title: '我的', iconType: 'user', text: '100', max: 99 }
+              { title: '系统管理', iconType: 'settings', text: 'new' },
+              { title: '我的', iconType: 'user', text: 'new', max: 99 }
             ]}
             onClick={this.handleClick.bind(this)}
             current={this.state.current}

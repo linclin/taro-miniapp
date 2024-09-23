@@ -16,7 +16,7 @@ Taro 4 + Taro UI 3实现的React小程序开发脚手架
 ## 编译运行
 
 ```bash
-$ taro create system --dir system
+$ taro create system
 
 $ yarn config set registry https://registry.npmmirror.com/
 $ yarn install
@@ -32,4 +32,12 @@ $ taro build --type weapp --watch
 $ yarn build:weapp
 或
 $ taro build --type weapp
+```
+
+## 微信小程序配置
+```bash
+#request合法域名
+https://api.datanexus.qq.com
+https://hmma.baidu.com
+https://zhls.qq.com
 ```
