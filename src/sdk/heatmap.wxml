@@ -1,0 +1,4 @@
+<view style="pointer-events:none;">
+  <canvas id="cvs" type="2d" style="position: absolute;top: 0;width: {{p_width || 0}}px; height: {{p_height || 0}}px"></canvas>
+  <canvas id="cvd" type="2d" style="display: none;width: 1px; height: 256px"></canvas>
+</view>

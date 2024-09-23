@@ -1,5 +1,6 @@
 import { Component, PropsWithChildren } from 'react'
-
+import './sdk/sr'
+import './sdk/mtj-wx-sdk'
 import './app.scss'
 
 

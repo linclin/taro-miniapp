@@ -9890,6 +9890,16 @@ sprintf-js@~1.0.2:
   resolved "https://registry.npmmirror.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
+sr-sdk-h5@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.npmmirror.com/sr-sdk-h5/-/sr-sdk-h5-1.5.1.tgz#6643359169a6aafecf0f7ecefada362293101942"
+  integrity sha512-WBPCS7HHmmWX2favbW/q+YDeoxXuqg4oAWF8hIyqGrPVOhzt536t4B/WA6UZrTVsAA0oro950wrCxGi5Y+sFHg==
+
+sr-sdk-wxapp@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.npmmirror.com/sr-sdk-wxapp/-/sr-sdk-wxapp-2.1.1.tgz#2950697a1dacb39cdc02785f86f9dd0ea7a38285"
+  integrity sha512-FYmmxqievx9gWbQJzTdJa6tU3b9R69AiH9LoCdKeFGTv8yrtN6E0eY0Pt6JTP5yr+/9H2S74jfx7Im11PxDXaA==
+
 stack-utils@^2.0.3:
   version "2.0.6"
   resolved "https://registry.npmmirror.com/stack-utils/-/stack-utils-2.0.6.tgz#aaf0748169c02fc33c8232abccf933f54a1cc34f"
