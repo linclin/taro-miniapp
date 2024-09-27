@@ -4,7 +4,7 @@
 Taro 4 + Taro UI 3实现的React小程序开发脚手架
 <p align="center">
 <img src="https://img.shields.io/badge/React-18.3.1-brightgreen" alt="React version"/>
-<img src="https://img.shields.io/badge/Taro-4.0.5-brightgreen" alt="Taro version"/>
+<img src="https://img.shields.io/badge/Taro-4.0.6-brightgreen" alt="Taro version"/>
 <img src="https://img.shields.io/badge/Taro UI-3.3.0-brightgreen" alt="Taro UI version"/> 
 </p>
 </div>
@@ -20,6 +20,7 @@ $ taro create system
 
 $ yarn config set registry https://registry.npmmirror.com/
 $ yarn install
+$ yarn add --dev terser-webpack-plugin
 $ yarn upgrade-interactive --latest
 
 
@@ -35,7 +36,8 @@ $ taro build --type weapp
 ## 微信小程序配置
 ```bash
 #request合法域名
-https://api.datanexus.qq.com
-https://hmma.baidu.com
-https://zhls.qq.com
+https://zhls.qq.com  #腾讯有数
+https://api.datanexus.qq.com #腾讯有数
+https://hmma.baidu.com #百度统计
+
 ```
