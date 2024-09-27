@@ -20,8 +20,6 @@ $ taro create system
 
 $ yarn config set registry https://registry.npmmirror.com/
 $ yarn install
-$ yarn add --dev @tarojs/plugin-react-devtools
-$ yarn upgrade  
 $ yarn upgrade-interactive --latest
 
 
