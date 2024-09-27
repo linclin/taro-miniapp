@@ -4,7 +4,6 @@ export default {
     quiet: false,
     stats: true
   },
-  // plugins: ['@tarojs/plugin-react-devtools'],
   cache: {
     enable: false
   },
