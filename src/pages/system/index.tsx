@@ -1,6 +1,7 @@
 import { Component, PropsWithChildren } from 'react'
 import { View, Text } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
+import TabBar from '../../component/TabBar';
 
 import "taro-ui/dist/style/components/button.scss" // 按需引入
 import './index.scss'
@@ -23,6 +24,7 @@ export default class System extends Component<PropsWithChildren> {
         <AtButton type='primary' circle={true}>支持</AtButton>
         <Text>共建？</Text>
         <AtButton type='secondary' circle={true}>来</AtButton>
+        <TabBar />
       </View>
     )
   }

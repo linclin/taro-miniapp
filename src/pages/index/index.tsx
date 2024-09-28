@@ -1,21 +1,24 @@
-import { Component, PropsWithChildren } from 'react'
+import { Component, PropsWithChildren } from 'react';
 import Taro from '@tarojs/taro';
 import { View, Canvas } from '@tarojs/components'
-import { AtTabBar, AtCard, AtIcon, AtDivider} from 'taro-ui'
+import { AtCard, AtIcon, AtDivider} from 'taro-ui';
 import uCharts from '../../sdk/u-charts.min.js';
 import dayjs from 'dayjs';
-import httpRequest from '../../utils/http-request'
+import httpRequest from '../../utils/http-request';
+import TabBar from '../../component/TabBar';
 import './index.scss'
 var uChartsLineInstance = {};
 var uChartsPieInstance = {};
 export default class Index extends Component<PropsWithChildren> {
-  state = {
-    today:"",
-    current: 0,
-    cWidth: 750,
-    cHeight: 500,
-    pixelRatio: 1,
-    sysdata:{},
+  constructor (props) {
+    super(props)
+    this.state = {
+      today:"",
+      cWidth: 750,
+      cHeight: 500,
+      pixelRatio: 1,
+      sysdata:{},
+    }
   }
   componentDidMount () {
     const today = dayjs().format('MM-DD');
@@ -139,21 +142,6 @@ export default class Index extends Component<PropsWithChildren> {
     uChartsPieInstance[e.target.id].touchLegend(e);
     uChartsPieInstance[e.target.id].showToolTip(e);
   }
-  handleClick (value) {
-    this.setState({
-      current: value
-    })
-    if (value === 1) {
-      Taro.reLaunch({
-        url: '/pages/system/index'
-      })
-    }
-    if (value === 2) {
-      Taro.reLaunch({
-        url: '/pages/user/index'
-      })
-    }
-  }
   render () {
     return (
        <View className='<%= pageName %>'>
@@ -217,16 +205,7 @@ export default class Index extends Component<PropsWithChildren> {
             class="charts"
             onTouchEnd={this.pieTap}
         />
-        <AtTabBar
-            fixed
-            tabList={[
-              { title: '工作台', iconType: 'analytics', text: 'new' },
-              { title: '系统管理', iconType: 'settings', text: 'new' },
-              { title: '我的', iconType: 'user', text: 'new', max: 99 }
-            ]}
-            onClick={this.handleClick.bind(this)}
-            current={this.state.current}
-        />
+        <TabBar />
        </View>
     )
   }

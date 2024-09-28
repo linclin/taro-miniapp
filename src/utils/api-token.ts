@@ -5,8 +5,6 @@ class apiToekn {
     const currentTime = Date.now();
     var storedApiToken = Taro.getStorageSync('api-token')
     console.log("storedApiToken ",storedApiToken)
-    console.log("storedApiToken.expires ",storedApiToken.expires)
-    console.log("storedApiToken.token ",storedApiToken.token)
     if (storedApiToken) {
       if (currentTime < storedApiToken.expires) {
         return storedApiToken.token ;
