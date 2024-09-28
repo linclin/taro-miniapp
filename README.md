@@ -36,8 +36,8 @@ $ taro build --type weapp
 ## 微信小程序配置
 ```bash
 #request合法域名
-https://zhls.qq.com  #腾讯有数
+https://zhls.qq.com  #腾讯有数 https://srdata.tencent.com/web/home
 https://api.datanexus.qq.com #腾讯有数
-https://hmma.baidu.com #百度统计
+https://hmma.baidu.com #百度统计 https://mtj.baidu.com/web/dashboard
 
 ```

@@ -7,25 +7,25 @@ module.exports = {
      * 从百度移动统计获取的AppKey
      * @type {string}
      */
-    appKey: 'wxcced476fcab1b3a6',
+    appKey: '571e92c675',
 
     /**
      * 是否使用了插件
      * @type {boolean}
      */
-    hasPlugin: false,
+    hasPlugin: true,
 
     /**
      * 是否获取当前的地理位置和速度信息
      * @type {boolean}
      */
-    getLocation: false,
+    getLocation: true,
 
     /**
      * 是否获取组件滚动信息
      * @type {boolean}
      */
-    getComponentScroll: false,
+    getComponentScroll: true,
     /**
      * 是否开启了A/B 测试
      * @type {boolean}
@@ -35,5 +35,5 @@ module.exports = {
      * 是否开启热力图功能
      * @type {boolean}
      */
-    hasHeatmap: false,
+    hasHeatmap: true,
 };
