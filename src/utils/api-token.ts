@@ -9,10 +9,12 @@ class apiToekn {
       if (currentTime < storedApiToken.expires) {
         return storedApiToken.token ;
       } else {
-        return this.setToekn();
+        this.setToekn();
+        return Taro.getStorageSync('api-token');
       }
     }else{
-      return this.setToekn();
+      this.setToekn();
+      return Taro.getStorageSync('api-token');
     }
   }
 
@@ -41,7 +43,6 @@ class apiToekn {
         return "";
       }
     })
-    
   }
 }
 
