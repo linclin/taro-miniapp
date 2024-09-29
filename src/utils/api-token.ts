@@ -7,14 +7,16 @@ class apiToekn {
     console.log("storedApiToken ",storedApiToken)
     if (storedApiToken) {
       if (currentTime < storedApiToken.expires) {
-        return storedApiToken.token ;
+        return storedApiToken.token;
       } else {
         this.setToekn();
-        return Taro.getStorageSync('api-token');
+        var storedApiToken = Taro.getStorageSync('api-token')
+        return storedApiToken.token;
       }
     }else{
       this.setToekn();
-      return Taro.getStorageSync('api-token');
+      var storedApiToken = Taro.getStorageSync('api-token')
+      return storedApiToken.token;
     }
   }
 

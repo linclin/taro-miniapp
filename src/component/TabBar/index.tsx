@@ -31,6 +31,7 @@ export default function TabBar() {
     <View>
       <AtTabBar
         fixed
+        backgroundColor='#ececec'
         tabList={[
           { title: '工作台', iconType: 'analytics', text: 'new' },
           { title: '系统管理', iconType: 'settings', text: 'new' },
