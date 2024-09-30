@@ -18,9 +18,6 @@ export default class Index extends Component<PropsWithChildren> {
       cHeight: 500,
       pixelRatio: 1,
       sysdata:{},
-      lineCategories:[],
-      lineSeriesData:[],
-      pieSeriesData:[],
     }
   }
   componentDidMount () {
@@ -43,28 +40,29 @@ export default class Index extends Component<PropsWithChildren> {
   componentWillUnmount () { }
   componentDidShow () { }
   componentDidHide () { }
-  getServerData = ()=>{
+  getServerData = async () => {  
     let lineCategories = [];
     let lineSeriesData = [];
     let pieSeriesData = [];
-    httpRequest.get('/api/v1/data/list').then(({ data }) => {
-      if (data) {
-        console.log("/api/v1/data/list",data);
-        this.setState({sysdata: data });
-        data.WeekApiCount.forEach(item => {
-          lineCategories.push(dayjs(item.Date).format('MM-DD'));
-          lineSeriesData.push(item.Count); 
-        })
-        this.setState({lineCategories: lineCategories });
-        this.setState({lineSeriesData: lineSeriesData });
-        data.WeekClientApiCount.forEach(item => {
-          pieSeriesData.push({"name":item.ClientIP,"value":item.Count});
-        })
-        this.setState({pieSeriesData: pieSeriesData }); 
-      }
-    });
-    console.log("lineCategories",lineCategories);
-    console.log("lineSeriesData",lineSeriesData);
+    const res = await httpRequest.get('/api/v1/data/list');
+    if (!res.success){
+      Taro.showToast({
+        title: res.msg,
+        icon: 'none'
+      })
+    }else{
+      this.setState({sysdata: res.data });
+      res.data.WeekApiCount.forEach(item => {
+        lineCategories.push(dayjs(item.Date).format('MM-DD'));
+        lineSeriesData.push(item.Count); 
+      })
+      this.setState({lineCategories: lineCategories });
+      this.setState({lineSeriesData: lineSeriesData });
+      res.data.WeekClientApiCount.forEach(item => {
+        pieSeriesData.push({"name":item.ClientIP,"value":item.Count});
+      })
+      this.setState({pieSeriesData: pieSeriesData }); 
+    }
     let lineRes = {
       categories: lineCategories,
       series: [
@@ -74,7 +72,6 @@ export default class Index extends Component<PropsWithChildren> {
         }
       ]
     };
-    console.log("pieSeriesData",pieSeriesData);
     this.drawLineCharts('WeekApiCountLine', lineRes);
     let pieRes = {
       series: [
@@ -86,7 +83,6 @@ export default class Index extends Component<PropsWithChildren> {
     this.drawPieCharts('WeekClientApiCountPie', pieRes);
   }
   drawLineCharts = (id, data)=>{
-    console.log("drawLineCharts",data);
     const { cWidth, cHeight, pixelRatio } = this.state;
     const query = Taro.createSelectorQuery();
     query.select('#' + id).fields({ node: true, size: true }).exec(res => {
@@ -130,7 +126,6 @@ export default class Index extends Component<PropsWithChildren> {
     });
   }
   drawPieCharts = (id, data)=>{
-    console.log("drawPieCharts",data);
     const { cWidth, cHeight, pixelRatio } = this.state;
     const query = Taro.createSelectorQuery();
     query.select('#' + id).fields({ node: true, size: true }).exec(res => {

@@ -4,9 +4,6 @@ import { Provider } from 'react-redux';
 import store from './store/index'
 // import { PersistGate } from 'redux-persist/integration/react';
 // import { persistStore } from 'redux-persist';
-
-
-import './sdk/sr'
 import './sdk/mtj-wx-sdk'
 import './app.scss'
 // let persistor = persistStore(store); 

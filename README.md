@@ -20,7 +20,6 @@ $ taro create system
 
 $ yarn config set registry https://registry.npmmirror.com/
 $ yarn install
-$ yarn add --dev terser-webpack-plugin  thread-loader cache-loader taro-plugin-compiler-optimization
 $ yarn upgrade-interactive --latest
 
 

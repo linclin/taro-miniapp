@@ -2,7 +2,7 @@ import { Component, PropsWithChildren } from 'react'
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components'
 import { AtGrid, AtDivider } from "taro-ui"
-import TabBar from '../../component/TabBar';
+import TabBar from '../../../component/TabBar';
 import './index.scss'
 
 export default class System extends Component<PropsWithChildren> {
@@ -14,8 +14,10 @@ export default class System extends Component<PropsWithChildren> {
 
   componentDidHide () { }
   private handleClick = (value, index): void => {
-    Taro.navigateTo({
-      url: value.url,
+    Taro.showModal({
+      title: '提示',
+      content: `Value: ${JSON.stringify(value)}, Index: ${index}`,
+      showCancel: false
     })
   }
   render () {
@@ -26,13 +28,13 @@ export default class System extends Component<PropsWithChildren> {
           [
             {
               iconInfo: { size: 30,  color: '#6190E8', value: 'settings'},
-              value: '外部调用系统',
-              url: '/pages/system/sys_system/index'
+              value: '系统管理',
+              url: '支持自定义字段'
             },
             {
               iconInfo: { size: 30,  color: '#6190E8', value: 'user'},
-              value: '用户角色权限',
-              url: '/pages/system/sys_role/index'
+              value: '角色管理',
+              url: '支持自定义字段'
             },
           ]
         } />

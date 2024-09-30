@@ -9,14 +9,14 @@ class apiToekn {
       if (currentTime < storedApiToken.expires) {
         return storedApiToken.token;
       } else {
-        this.setToekn();
-        var storedApiToken = Taro.getStorageSync('api-token')
-        return storedApiToken.token;
+        this.setToekn().then(({ data }) => {
+          return data.token;
+        });
       }
     }else{
-      this.setToekn();
-      var storedApiToken = Taro.getStorageSync('api-token')
-      return storedApiToken.token;
+      this.setToekn().then(({ data }) => {
+        return data.token;
+      });
     }
   }
 
@@ -24,7 +24,7 @@ class apiToekn {
     const apiUrl = process.env.TARO_APP_API;
     const appId = process.env.TARO_APP_API_APPID;
     const appSecret = process.env.TARO_APP_API_APPSECRET;
-    Taro.request({
+    return Taro.request({
       url:  `${apiUrl}/api/v1/base/auth`,
       data: {
         AppId: appId,
@@ -38,11 +38,9 @@ class apiToekn {
       },
       success: function (res) {
         Taro.setStorageSync("api-token", {token: res.data.token, expires: Date.now() + 7000 * 1000})
-        return res.data.token;
       },
       fail: function (res) { 
         console.log("setToekn fail ",process.env.TARO_APP_API, res)
-        return "";
       }
     })
   }
